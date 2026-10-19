@@ -11,7 +11,7 @@ Test Driven Development is a process where tests are written before the code is 
 Steps to follow TDD:
 
 1. Write a list of user stories that describe what the application should do. These user stories should be non-technical (the type of thing that a customer would write).
-2. Pick a user story and express the user story in a unit test.
+2. Pick a user story and express the user story in a unit/itegration/end-to-end test.
 3. Write just enough code to pass the unit test. In other words, do the simplest thing that could possibly work to pass the unit test.
 4. Consider refactoring your code to improve the design of your application. You can fearlessly refactor because your code is covered by unit tests.
 5. Repeat steps 2 – 3 until you have completed the application (keeping in mind that the user stories might change over the course of the process of writing the application).
@@ -151,7 +151,7 @@ In testing frameworks like Jest `test`, `describe`, and `it` are used to structu
         it('Adds two numbers correctly', () => {
           expect(add(1, 2)).toBe(3);
         });
- 
+
         it('Subtracts two numbers correctly', () => {
           expect(subtract(5, 3)).toBe(2);
         });
@@ -202,7 +202,7 @@ In testing frameworks like Jest `test`, `describe`, and `it` are used to structu
     });
     ```
 
-1. Update `vite.config.ts` by addin test configuration:
+1. Update `vite.config.ts` by adding test configuration:
 
     ```ts
     /// <reference types="vitest/config" /> // https://vitest.dev/config/
@@ -241,7 +241,7 @@ In testing frameworks like Jest `test`, `describe`, and `it` are used to structu
       const element = screen.getByText(
         'Profile',
       );
-      
+
       // check that the element is found (not undefined)
       expect(element).toBeDefined();
     });
@@ -336,7 +336,7 @@ Things to consider when writing comprehensive integration tests:
 
 ### API testing with [supertest](https://github.com/ladjs/supertest#readme) and [Jest](https://jestjs.io/)
 
-Supertest is a popular library for testing Node.js HTTP servers. It provides a high-level abstraction for testing HTTP requests and responses, making it easy to write integration tests for your API endpoints. Jest is a widely used testing framework for JavaScript and TypeScript applications and can be used in conjunction with Supertest to create comprehensive integration tests for your API. 
+Supertest is a popular library for testing Node.js HTTP servers. It provides a high-level abstraction for testing HTTP requests and responses, making it easy to write integration tests for your API endpoints. Jest is a widely used testing framework for JavaScript and TypeScript applications and can be used in conjunction with Supertest to create comprehensive integration tests for your API.
 
 1. Install tools: `npm install --save-dev supertest jest`
 1. Add test script to `package.json`:
@@ -434,7 +434,7 @@ Supertest is a popular library for testing Node.js HTTP servers. It provides a h
     const closePool = async () => {
       await promisePool.end();
     };
-    export {closePool};    
+    export {closePool};
     ```
 
 1. Add `afterAll` hook to close the database connection after all tests are done to `api.test.js`:

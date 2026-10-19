@@ -86,7 +86,7 @@ export default Example;
 - `useEffect` runs after the component renders and after every re-render.
 - `useEffect` takes a function as an argument. This function is the effect.
 - Second argument to `useEffect` is an array of values (dependencies). If any of the values change, the effect is re-run. If the array is empty, the effect is only run once, after the initial render. If you omit the second argument, the effect is run after every render which is not recommended.
-    - **Infinte re-renders can occur** if there is a problem with the dependencies. E.g., if you forget to add the dependencies to the array or if you add a dependency that changes every time the component renders.
+    - **Infinite re-renders can occur** if there is a problem with the dependencies. E.g., if you forget to add the dependencies to the array or if you add a dependency that changes every time the component renders.
 - You can have multiple `useEffect` hooks in a component.
 - Cleanup function can be returned from the effect. This function runs before the component is removed from the UI to prevent memory leaks.
 - Example of `useEffect` hook with cleanup function:
@@ -144,7 +144,7 @@ export default Example;
        setMediaArray(json);
     };
     getMedia();
-   
+
     console.log(mediaArray);
     ```
 
@@ -156,6 +156,10 @@ export default Example;
 
     ```jsx
     useEffect(() => {
+        const getMedia = async () => {
+          const json = await fetchData('test.json');
+          setMediaArray(json);
+        };
         getMedia();
     }, []);
     ```
@@ -184,12 +188,12 @@ export default Example;
         const result = await fetchData(url + item.id);
         return result;
     }));
-   
+
    console.log(newArray);
    ```
 
 7. Use the example above to get the user data for each media item and add it to the media item. Promise.all should return
-   an array of media items with user data. 
+   an array of media items with user data.
     - You can do this in the `array.map` part of the `Promise.all` function.
     - Then you can use object spread to add the user data to the media
       item: `{ ...item, username: result.username }`.
@@ -198,10 +202,4 @@ export default Example;
 
 ## Submit
 
-1. Run `npm build` or `npm run build`
-2. Move build folder to your public_html
-3. Test your app: `http://users.metropolia.fi/~username/hooks`
-4. Modify README.md. Change the link in `Open [X](X) to view it in the browser.` to point to the above link.
-5. git add, commit & push to remote repository
-6. Submit the link to correct branch of your repository to Oma
-
+Build, publish and submit the app by following [these instructions](publish-react-app.md). Use `hooks` as the `<app-folder>`.

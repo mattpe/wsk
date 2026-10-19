@@ -212,7 +212,7 @@ Study: [React Router Tutorial](https://reactrouter.com/7.5.0/tutorials/address-b
 
 1. Replace the `<dialog>` based `SingleView` component with the `Single` component in `views` folder.
     - Idea is to use router to display the `Single` component when a user clicks a media item in the `MediaRow` component.
-    - In `MediaRow` component, use `Link` component istead of `<button>` to navigate, item object can be passed as [`state`](https://reactrouter.com/en/main/components/link#state) prop to the `Link` component:
+    - In `MediaRow` component, use `Link` component instead of `<button>` to navigate, item object can be passed as [`state`](https://reactrouter.com/en/main/components/link#state) prop to the `Link` component:
 
     ```jsx
     <Link to="/single" state={{item}}>Show</Link>
@@ -246,32 +246,4 @@ Study: [React Router Tutorial](https://reactrouter.com/7.5.0/tutorials/address-b
 
 ### Build and publish the app
 
-1. Check [Building for Production](https://vitejs.dev/guide/build)
-1. To fix the paths for `assets` and navigation in production build, set the _public base path_ e.g. by adding `base` property to `vite.config.js`:
-
-    ```js
-    ...
-    export default defineConfig({
-      plugins: [react()],
-      base: '/~your-username/routing/',
-    });
-    ```
-
-| :exclamation:  Note! The trailing slash must exist in the `base` path, otherwise issues will arise.   |
-|--|
-
-    Then add the same path to the `basename` prop of the `BrowserRouter` component in `App.jsx` by reading it from the config:
-
-    ```jsx
-    <BrowserRouter basename={import.meta.env.BASE_URL}>
-    ```
-
-    
-
-1. Run `npm build` or `npm run build`
-1. Copy contents of build folder (`dist/*`) to your home dir's `public_html/wsk-routing/` (shell.metropolia.fi)
-    - Can be done with scp tool in terminal: `scp -r dist/* your-username@shell.metropolia.fi:~/public_html/wsk-routing/`
-1. Test your app: <https://users.metropolia.fi/~your-username/wsk-routing/>
-1. Modify `README.md`. Add a text paragraph and link: `Open [link text here](https://users.metropolia.fi/~your-username/wsk-routing/) to view it in the browser.`
-1. git add, commit & push current branch to the remote repository (GitHub)
-1. Submit the link to correct branch of your repository to Oma
+Build, publish and submit the app by following [these instructions](publish-react-app.md). Use `wsk-routing` as the `<app-folder>`.

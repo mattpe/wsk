@@ -106,7 +106,7 @@ sequenceDiagram
     AuthServer->>Server: JWT
     Server->>Client: HTTP Response with JWT
     Note over Client: Stores JWT (usually in memory)
-    
+
     Client->>Server: Subsequent HTTP Request with JWT in header
     Note over Server: Verifies JWT
     alt JWT valid
@@ -115,7 +115,7 @@ sequenceDiagram
         Server->>Client: Unauthorized Response
     end
 ```
---- 
+---
 
 ## Bcrypt
 
@@ -150,7 +150,7 @@ Express is a minimalistic framework that does not provide any built-in mechanism
 
 In web applications, authentication is typically done by verifying a username and password combination. Authorization is typically done by checking the user's role or permissions.
 
-### Assignment
+### Assignment 6
 
 1. Create new branch `assignment6` based on `main`
 2. Install [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
@@ -159,7 +159,7 @@ In web applications, authentication is typically done by verifying a username an
     - use a long random string, e.g. from [random.org](https://www.random.org/strings/)
     - or use the `crypto` module to generate a random string
 5. Modify `postUser()` in `user-controller.js` to hash the password before saving it to the database:
-    
+
     ```js
     import bcrypt from 'bcrypt';
     ...
@@ -178,7 +178,7 @@ In web applications, authentication is typically done by verifying a username an
    ...
    const findUserByUsername = async (user) => {
        const sql = `SELECT *
-                 FROM wsk_users 
+                 FROM wsk_users
                  WHERE username = ?`;
    ...
    ...
@@ -191,7 +191,7 @@ In web applications, authentication is typically done by verifying a username an
     import bcrypt from 'bcrypt';
     import {findUserByUsername} from '../models/user-model.js';
     import 'dotenv/config';
-    
+
     const postLogin = async (req, res) => {
       console.log('postLogin', req.body);
       const user = await findUserByUsername(req.body.username);
@@ -199,13 +199,13 @@ In web applications, authentication is typically done by verifying a username an
         res.sendStatus(401);
         return;
       }
-    
+
       const passwordMatch = await bcrypt.compare(req.body.password, user.password);
       if (!passwordMatch) {
         res.sendStatus(401);
         return;
       }
-      
+
       const userWithNoPassword = {
         user_id: user.user_id,
         name: user.name,
@@ -219,7 +219,7 @@ In web applications, authentication is typically done by verifying a username an
       });
       res.json({user: userWithNoPassword, token});
     };
-    
+
     export {postLogin};
     ```
 
@@ -231,9 +231,9 @@ In web applications, authentication is typically done by verifying a username an
      ```js
      import jwt from 'jsonwebtoken';
      import 'dotenv/config';
-    
+
      ...
-    
+
      const authenticateToken = (req, res, next) => {
        console.log('authenticateToken', req.headers);
        const authHeader = req.headers['authorization'];
@@ -265,7 +265,7 @@ In web applications, authentication is typically done by verifying a username an
          res.sendStatus(401);
        }
      };
-    
+
      // router:
      ...
      import {getMe, postLogin} from '../controllers/auth-controller.js';
@@ -279,6 +279,7 @@ In web applications, authentication is typically done by verifying a username an
 
      ```http
      ### Post login
+     # @name login
      POST http://localhost:3000/api/v1/auth/login
      content-type: application/json
 
@@ -288,17 +289,16 @@ In web applications, authentication is typically done by verifying a username an
      }
      ```
 
-     - Check the response and copy the token from the response body and use it in the requests for routes that need authentication
-     - When using VS Code REST Client you can store the token to variable:
+     - Token from the response will be stored in the login variable, defined above as `@name login`
+     - When using VS Code REST Client you can pass the token to the header with `{{}}`
+     - login variable stores the http response from the body, `login.response.body.token`
 
      ```http
-     @token = <put-your-token-from-login-response-here>
-
      ### Get my user info
      GET http://localhost:3000/api/v1/auth/me
-     Authorization: Bearer {{token}}
+     Authorization: Bearer {{login.response.body.token}}
      ```
-     
+
      - Use the `Authorization` header with `Bearer <token>` for all routes that need authentication
      - or test with Postman (just set 'Bearer token' on 'Authorization' tab after succesful login POST).
 
@@ -328,7 +328,7 @@ In web applications, authentication is typically done by verifying a username an
 
 ---
 
-## Web Application Security 
+## Web Application Security
 
 ### Data Security
 
@@ -364,7 +364,7 @@ While data security and data privacy are distinct, they are deeply interconnecte
     - [SSL certificate](https://www.kaspersky.com/resource-center/definitions/what-is-a-ssl-certificate) _authenticates_ a website's identity and enables an encrypted connection
     - Protection of the _privacy_ and _integrity_ of the exchanged data
     - Always use HTTPS to encrypt data in transit and protect against eavesdropping, man-in-the-middle attacks, and data tampering.
-    - When using node.js, it is generally better to implement TLS in reverse-proxy such as Apache or Nginx, (just like we did with our [example deployment](08-deployment.md#nodejs-runtime-and-process-management))
+    - When using node.js, it is generally better to implement TLS in reverse-proxy such as Apache or Nginx, (just like we did with our [example deployment](../ecloud/ohje-en.md#8-publish-app-with-apache))
     - All unsecure HTTP connections (port 80) should be automatically redirected to HTTPS (port 443) by using [HTTP status codes](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html), the 3XX codes are redirect, 301 means Moved Permanently.
     - (Typically, for localhost development environments secure connections are not needed)
 1. **Authentication**

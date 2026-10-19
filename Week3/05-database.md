@@ -2,7 +2,9 @@
 
 Recap [relational databases and SQL](../project/databases.md).
 
-1. Create a new branch `Assignment5` from `main`.
+## Assignment 5
+
+1. Create a new branch `assignment5` from `main`.
 1. Import the [example database](../database/cats-db.sql) to your MySQL database on Metropolia's server.
    1. Create a database in https://amme.metropolia.fi/mysql/. Login with your Metropolia username and password. When creating the database **DO NOT USE THE SAME PASSWORD AS YOUR METROPOLIA ACCOUNT.**
    2. Open https://users.metropolia.fi/phpMyAdmin/
@@ -48,11 +50,11 @@ Recap [relational databases and SQL](../project/databases.md).
     // This will load variables from .env file to process.env
     // it can be done also e.g. in index.js but just make sure
     // that it is imported before using process.env variables
-    import 'dotenv/config'; 
+    import 'dotenv/config';
 
     // Create the connection pool. Pool is used to improve performance
     // by reusing existing connections instead of creating new
-    // connection for every request 
+    // connection for every request
     const pool = mysql.createPool({
       host: process.env.DB_HOST,
       user: process.env.DB_USER,
@@ -67,6 +69,9 @@ Recap [relational databases and SQL](../project/databases.md).
     const promisePool = pool.promise();
     export default promisePool;
     ```
+   
+### MariaDB Cloud
+**Note, if you want to use MariaDB Cloud, add one more property to the options ```port: process.env.DB_PORT```. Also add DB_PORT to .env file. E.g. ```DB_PORT=4006```**
 
 ### MySQL2 examples
 
@@ -133,11 +138,11 @@ export {listAllCats, findCatById, addCat, modifyCat, removeCat};
 
 ---
 
-### Continue assignment
+### Continue assignment 5
 
 1. Convert your existing REST API to use MySQL database for storing data. You can use the `cat-model.js` as a reference.
 1. Update the user routes to use the database.
    - Note: when deleting users from the database, you should also delete all the cats that belong to the user because of the foreign key constraint. It is strongly recommended to use [transactions](../database/transaction-example.js) to ensure data integrity.
 1. Add owner's name to response json when getting cats.
 1. Add endpoint to get cats by user id.
-1. Commit and push your branch changes to the remote repository. Merge the `Assignment5` branch to the `main` branch and push the changes to the remote repository.
+1. Commit and push your branch changes to the remote repository. Merge the `assignment5` branch to the `main` branch and push the changes to the remote repository.

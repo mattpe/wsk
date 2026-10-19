@@ -22,12 +22,12 @@
    ```jsx
    // TODO: add necessary imports
    const useMedia = () => {
-   // TODO: move mediaArray state here
-   // TODO: move getMedia function here
-   // TODO: move useEffect here
-   return {mediaArray};
+     // TODO: move mediaArray state here
+     // TODO: move getMedia function here
+     // TODO: move useEffect here
+     return {mediaArray};
    };
-   
+
    export {useMedia};
    ```
 
@@ -35,12 +35,9 @@
 
    ```jsx
    const Home = () => {
-        const [selectedItem, setSelectedItem] = useState(
-        null,
-    );
-    
+        const [selectedItem, setSelectedItem] = useState(null);
         const {mediaArray} = useMedia();
-    
+
         return (
             <>
                 <SingleView item={selectedItem} setSelectedItem={setSelectedItem} />
@@ -63,13 +60,8 @@
 6. The app should work as before. Test it.
 7. Git add, commit and push the changes to your repository.
 
-**(If we have time, we can refactor the other functionalities to custom hooks as well. For example, useUser hook for the user functionalities: `getUserByToken()`, `postUser()` etc. )**
+**(If we have time, we can refactor the other functionalities to custom hooks as well. For example, useUser hook for the user functionalities: `getUserByToken()`, `postUser()` etc.)**
 
 ## Submit
 
-1. Run `npm build` or `npm run build`
-2. Move build folder to your public_html
-3. Test your app: `http://users.metropolia.fi/~username/custom-hooks`
-4. Modify README.md. Change the link in `Open [X](X) to view it in the browser.` to point to the above link.
-5. git add, commit & push to remote repository
-6. Submit the link to correct branch of your repository to Oma
+Build, publish and submit the app by following [these instructions](../Week4/publish-react-app.md). Use `custom-hooks` as the `<app-folder>`.
