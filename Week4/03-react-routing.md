@@ -212,10 +212,10 @@ Study: [React Router Tutorial](https://reactrouter.com/tutorials/address-book)
 
 1. Replace the `<dialog>` based `SingleView` component with the `Single` component in `views` folder.
     - Idea is to use router to display the `Single` component when a user clicks a media item in the `MediaRow` component.
-    - In `MediaRow` component, use `Link` component instead of `<button>` to navigate, item object can be passed as [`state`](https://reactrouter.com/en/main/components/link#state) prop to the `Link` component:
+    - In `MediaRow` component, use `Link` component instead of `onClick()` to navigate, item object can be passed as `state` prop to the `Link` component and accessed using [`useLocation`](https://reactrouter.com/api/hooks/useLocation) hook in `Single` view:
 
     ```jsx
-    <Link to="/single" state={{item}}>Show</Link>
+    <Link to="/single" state={item}>Show</Link>
     ```
 
 1. Copy the JSX needed for displaying the media item from `components/SingleView.jsx` to `views/Single.jsx` and modify it to use the `item` from `useLocation().state` instead of `selectedItem` state variable.
@@ -225,13 +225,13 @@ Study: [React Router Tutorial](https://reactrouter.com/tutorials/address-book)
 
     const Single = () => {
       const {state} = useLocation();
-      const item = state.item;
+      const item = state;
       ...
       // TODO: Return JSX for displaying a mediafile here
       ...
     ```
 
-1. You can navigate back to listing with browser's back button or by using React Router's [`useNavigate`](https://reactrouter.com/en/main/hooks/use-navigate) hook with a button (more about hooks in the next week):
+1. You can navigate back to listing with browser's back button or by using React Router's [`useNavigate`](https://reactrouter.com/api/hooks/useNavigate#usenavigate) hook with a button (more about hooks in the next week):
 
     ```jsx
     import {useNavigate} from "react-router";
