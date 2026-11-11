@@ -151,7 +151,7 @@ Benefits of Using Outlet:
 
 ## Assignment: Implementing Routing with React Router
 
-Study: [React Router Tutorial](https://reactrouter.com/7.5.0/tutorials/address-book)
+Study: [React Router Tutorial](https://reactrouter.com/tutorials/address-book)
 
 1. Create a git branch `routing` based on the previous exercise and checkout to it.
 1. Install React Router: `npm install react-router`
